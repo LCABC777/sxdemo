@@ -69,9 +69,10 @@ function addZrr(currentId) {
         url: "addZrr.do",
         async: false,
         success: function (data) {
-            $('#bfyrDiv').append($(data));
+            var obj=$(data);
+            $('#bfyrDiv').append(obj);
             //给dom对象,初始化表单
-            initFormByParent($(data));
+            initFormByParent(obj);
             if (currentId == null) {
                 formId = formId + 1;
                 $('#zrr').attr('id', xfbh + 'zrr' + formId);
@@ -92,8 +93,9 @@ function addDw(currentId){
         url:"addDw.do",
         async:false,
         success:function(data){
-            $('#bfyrDiv').append($(data));
-            initFormByParent($(data));
+            var obj=$(data);
+            $('#bfyrDiv').append(obj);
+            initFormByParent(obj);
             if(currentId == null){
                 formId = formId + 1;
                 $('#dw').attr('id', xfbh + 'dw' + formId);
@@ -114,8 +116,9 @@ function addSjsg(newFormId){
         url:"addSjsg.do",
         async:false,
         success:function(data){
-            $('#bfyrDiv').append($(data));
-            initFormByParent($(data));
+            var obj=$(data);
+            $('#bfyrDiv').append(obj);
+            initFormByParent(obj);
             if(newFormId == null){
                 formId = formId + 1;
                 $('#sjsg').attr('id', xfbh + 'sjsg' + formId);
@@ -136,8 +139,9 @@ function addFyr(newFormId){
         url:"addFyr.do",
         async:false,
         success:function(data){
-            $('#fyrDiv').append($(data));
-            initFormByParent($(data));
+            var obj=$(data);
+            $('#fyrDiv').append(obj);
+            initFormByParent(obj);
             if(newFormId == null){
                 formId = formId + 1;
                 $('#fyr').attr('id', xfbh + 'fyr' + formId);
