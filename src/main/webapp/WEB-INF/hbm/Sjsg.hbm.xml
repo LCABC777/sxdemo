@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.tdh.po.Sjsg" table="sjsg" schema="serializeform">
+        <id name="id" column="id"/>
+        <property name="sjsgmc" column="sjsgmc"/>
+        <property name="sjsgdd" column="sjsgdd"/>
+        <property name="zrdwmc" column="zrdwmc"/>
+        <property name="zrdwfl" column="zrdwfl"/>
+        <property name="hyfl" column="hyfl"/>
+        <property name="fddbr" column="fddbr"/>
+        <property name="dwxz" column="dwxz"/>
+        <property name="dbrzjzl" column="dbrzjzl"/>
+        <property name="dbrzjhm" column="dbrzjhm"/>
+    </class>
+</hibernate-mapping>

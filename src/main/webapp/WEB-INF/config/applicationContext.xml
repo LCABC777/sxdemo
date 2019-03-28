@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+    <!--<import resource="spring-quartz.xml" />-->
+
+    <!-- 支持注解驱动 -->
+    <context:annotation-config/>
+    <!-- 扫描注解所在包 -->
+    <context:component-scan base-package="com.tdh.service" />
+    <context:component-scan base-package="com.tdh.dao" />
+    <context:component-scan base-package="com.tdh.controller" />
+    <!-- jdbc配置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/config/jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 数据库连接源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${base.driverClassName}"/>
+        <property name="url" value="${base.url}"/>
+        <property name="username" value="${base.username}"/>
+        <property name="password" value="${base.password}"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxIdle" value="20"/>
+        <property name="maxWait" value="2000"/>
+        <property name="defaultAutoCommit" value="false"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="180"/>
+        <!--<property name="logSql" value="true"/>--> <!--开启日志记录-->
+    </bean>
+
+    <!-- Hibernate Factory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>-->
+               <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!-- <prop key="hibernate.dialect">org.hibernate.dialect.DB2Dialect</prop> -->
+                <!-- <prop key="hibernate.dialect">org.hibernate.dialect.SybaseDialect</prop> -->
+                <!--<prop key="show_sql">true</prop>-->
+                <!--<prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>-->
+            </props>
+        </property>
+        <!-- 文件较多的时可以统一管理hbm文件放入到对应的文件夹下面即可. -->
+        <property name="mappingDirectoryLocations">
+            <list>
+                <value>WEB-INF/hbm</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--  <bean id="advice" class="com.lc.advice.MyAdvice"></bean>
+       aop配置
+      <aop:config>
+          <aop:aspect ref="advice">
+              <aop:pointcut expression="execution(* com.lc.service.*.*(..))" id="point"/>
+              <aop:before method="myBefore" pointcut-ref="point"/>
+              <aop:after method="myAfter" pointcut-ref="point"/>
+              <aop:after-throwing method="myThrowing" pointcut-ref="point"/>
+              <aop:after-returning method="myAfterReturning" pointcut-ref="point"/>
+          </aop:aspect>
+      </aop:config>-->
+
+    <!-- 事务代理Hibernate3 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref local="sessionFactory" />
+        </property>
+    </bean>
+
+    <!-- 注解Hibernate3 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+    <!-- Hibernate3 模板类 -->
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory" />
+        </property>
+    </bean>
+
+    <!--JDBC模板类,用于注入到JdbcSupport -->
+    <bean id="jdbcTemplate"  class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+</beans>

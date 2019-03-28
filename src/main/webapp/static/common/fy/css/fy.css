@@ -1,0 +1,39 @@
+.tdh_fy {
+	/*margin-top: 10px;*/
+	color: #666;
+	font-size: 12px;
+	padding: 7px 0;
+	background-color: #fcfcfc;
+	border: 1px solid #e7e7e7;
+	border-top: 1;
+	font-size: 14px;
+}
+
+.tdh_fy img {
+	vertical-align: middle;
+	margin: 0 5px;
+}
+
+.tdh_fy .cxtjinput {
+	width: 28px;
+	height: 24px;
+	border: 1px solid #d4d8de;
+	line-height: 24px;
+	text-align: center;
+	color: #666;
+	padding: 0;
+	margin: 0 5px;
+	vertical-align: middle;
+}
+
+.tdh_fy .tdh_fy_btn {
+	width: 48px;
+	border: 0;
+	background-color: #226de1;
+	cursor: pointer;
+	color: #fff;
+}
+
+#totalnum {
+	cursor: pointer;
+}

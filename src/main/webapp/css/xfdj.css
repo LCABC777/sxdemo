@@ -1,0 +1,396 @@
+body{ background-color: #cad5d9;}
+.wrapper {
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	overflow: auto;
+}
+.letter_stuff{
+	width: 48%;
+	height: 100%;
+	overflow: hidden;
+	float: left;
+	border-right: 1px solid #ece8e8;
+	box-sizing: border-box;
+	background-color: #fff;
+}
+.letter_info{
+	margin-left: 48%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #fff;
+}
+.letter_caption{
+	height: 48px;
+	border-bottom: 1px solid #ddd;
+	font-size: 15px;
+	line-height: 48px;
+	font-weight: bold;
+	background-color: #f9f9f9;
+}
+.icon_xfzl,.icon_register{
+	width: 16px;
+	height: 16px;
+	vertical-align: -2px;
+	margin: 0 5px 0 10px;
+}
+.icon_xfzl{
+	background-image: url(../images/stuff_16.png);
+}
+.icon_register{
+	background-image: url(../images/register_16.png);
+}
+.letter_operate{
+	float: right;
+	padding-right: 10px;
+}
+.letter_operate .tdh_btn{
+	color: #222;
+	margin-top: 6px;
+	border: 0;
+	background: none;
+	font-weight: normal;
+	font-size: 14px;
+	padding: 7px 0 7px 15px;
+	color: #226de1;
+}
+.letter_operate .tdh_btn_hover{
+	color: #FF5400;
+}
+.letter_operate .tdh_btn_disable{
+	color: #A8C4F0 !important;
+}
+.icon_import{
+	background-image: url(../images/import.png);
+}
+.icon_scan{
+	background-image: url(../images/scan.png);
+}
+.icon_scanner{
+	background-image: url(../images/scanner.png);
+}
+.icon_del{
+	background-image: url(../images/del.png);
+}
+.icon_catalogue{
+	background-image: url(../images/catalogue.png);
+}
+.icon_confirm{
+	background-image: url(../images/confirm.png);
+}
+.letter_operate .tdh_btn_hover .icon_import{
+	background-image: url(../images/import2.png);
+}
+.letter_operate .tdh_btn_hover .icon_scan{
+	background-image: url(../images/scan2.png);
+}
+.letter_operate .tdh_btn_hover .icon_scanner{
+	background-image: url(../images/scanner2.png);
+}
+.letter_operate .tdh_btn_hover .icon_del{
+	background-image: url(../images/del2.png);
+}
+.letter_operate .tdh_btn_hover .icon_catalogue{
+	background-image: url(../images/catalogue2.png);
+}
+.letter_operate .tdh_btn_hover .icon_confirm{
+	background-image: url(../images/confirm2.png);
+}
+.letter_operate .tdh_btn_disable .icon_confirm{
+	background-image: url(../images/confirm_dis.png);
+}
+.letter_display{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	position: relative;
+}
+.letter_display_bg{
+	background: url(../images/zwjzcl.png) no-repeat center;
+}
+.letter_catalog{
+	position: absolute;
+	top: 0;
+	left: 48px;
+	z-index: 2;
+	width: auto;
+	height: 100%;
+}
+.letter_catalog_btn{
+	position: absolute;
+	top: 0;
+	left: -48px;
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	background: url(../images/catalog1.png) no-repeat;
+	cursor: pointer;
+	z-index: 2;
+}
+.letter_tree{
+	width: 220px;
+	height: 100%;
+	background-color: #fff;
+	padding: 10px;
+	overflow: auto;
+	overflow-x: hidden;
+	border: 1px solid #aac7f5;
+	box-sizing: border-box;
+	display: none;
+}
+.letter_tree_rrow{
+	position: absolute;
+	top: 10px;
+	left: -5px;
+	display: inline-block;
+	width: 6px;
+	height: 12px;
+	background: url(../images/arrow.png) no-repeat;
+}
+.letter_file{
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.letter_file ul{
+	padding: 5px;
+}
+.letter_file li{
+	float: left;
+	width: 20%;
+	/* height: 194px; */
+	height:166px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+.letter_box,.letter_filebox{
+	width: 100%;
+	height: 100%;
+	border: 1px solid #f0f0f0;
+	box-sizing: border-box;
+	position: relative;
+	background: no-repeat center #f9f9f9;
+	/* background-size: 100% 100%; */
+	cursor: pointer;
+	position: relative;
+}
+.letter_filebox{
+	background: url(../images/file.png) no-repeat center;
+}
+.letter_file li p,.letter_file li input{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 24px;
+	font-size:12px;
+	text-align: center;
+	background: url(../images/p_bg.png) repeat;
+	color: #fff;
+}
+.letter_file li input{
+	background: #fff;
+	font-family: "微软雅黑";
+	border: 0;
+	color: #222;
+}
+.letter_file li .letter_filebox p{
+	background: none;
+	color: #222;
+}
+.letter_check{
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	background: no-repeat center;
+}
+.domBtn_selected,.letter_hover{
+	border-color: #216de0;
+}
+.domBtn_selected .letter_check{
+	background-image: url(../images/checked.png);
+}
+/*ztee样式更改******************/
+.ztree li a{
+	width: 100%;
+	padding-right: 42px;
+	box-sizing: border-box;
+	position: relative;
+}
+.ztree li span.node_name{
+	display: inline-block;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+span.tmpzTreeMove_arrow,ul.ztree.zTreeDragUL{
+	z-index: 3;
+}
+.ztree li span.button.remove{
+	position: absolute;
+	top: 0;
+	right: 12px;
+	background: url(../images/del_dis.png) no-repeat center;
+}
+.ztree li span.button.remove:hover{
+	background: url(../images/del.png) no-repeat center;
+}
+/***************/
+.letter_scan{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	overflow: hidden;
+	z-index: 1;
+}
+.letter_scan_prev,.letter_scan_next{
+	position: absolute;
+	top: 50%;
+	margin-top: -25px;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	background: no-repeat center;
+}
+.letter_scan_prev{
+	left: 0;
+	background-image: url(../images/scan/prev.png);
+}
+.letter_scan_next{
+	right: 0;
+	background-image: url(../images/scan/next.png);
+}
+.letter_scan_prev:hover{
+	background-image: url(../images/scan/prev2.png);
+}
+.letter_scan_next:hover{
+	right: 0;
+	background-image: url(../images/scan/next2.png);
+}
+.letter_scan_group{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 36px;
+	background: url(../images/p_bg.png) repeat;
+	text-align: right;
+}
+.letter_scan_btn{
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background: no-repeat center;
+	margin: 9px 10px 0;
+	position: relative;
+}
+.letter_scan_group .icon_close{
+	background-image: url(../images/scan/close.png);
+	position: absolute;
+	left: 0;
+}
+.letter_scan_group .icon_enlarge{
+	background-image: url(../images/scan/enlarge.png);
+}
+.letter_scan_group .icon_reduce{
+	background-image: url(../images/scan/reduce.png);
+}
+.letter_scan_group .icon_left{
+	background-image: url(../images/scan/left.png);
+}
+.letter_scan_group .icon_right{
+	background-image: url(../images/scan/right.png);
+}
+.letter_scan_group .icon_save{
+	background-image: url(../images/scan/save.png);
+}
+.letter_scan_group .icon_print{
+	background-image: url(../images/scan/print.png);
+}
+.letter_scan_group .icon_eraser{
+	background-image: url(../images/scan/eraser.png);
+}
+.letter_scan_group .icon_cutting{
+	background-image: url(../images/scan/cutting.png);
+}
+.letter_scan_group .icon_close:hover{
+	background-image: url(../images/scan/close2.png);
+}
+.letter_scan_group .icon_enlarge:hover{
+	background-image: url(../images/scan/enlarge2.png);
+}
+.letter_scan_group .icon_reduce:hover{
+	background-image: url(../images/scan/reduce2.png);
+}
+.letter_scan_group .icon_left:hover{
+	background-image: url(../images/scan/left2.png);
+}
+.letter_scan_group .icon_right:hover{
+	background-image: url(../images/scan/right2.png);
+}
+.letter_scan_group .icon_save:hover{
+	background-image: url(../images/scan/save2.png);
+}
+.letter_scan_group .icon_print:hover{
+	background-image: url(../images/scan/print2.png);
+}
+.letter_scan_group .icon_eraser:hover{
+	background-image: url(../images/scan/eraser2.png);
+}
+.letter_scan_group .icon_cutting:hover{
+	background-image: url(../images/scan/cutting2.png);
+}
+.image_tltle_btn_ul {
+    margin: 0 auto;
+    list-style: none;
+    display: inline-block;
+}
+
+.image_tltle_btn_ul li {
+    float: left !important;
+    text-align: center;
+    width: 50px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.image_tltle_btn_ul li i {
+    color: #1966d9;
+    font-size: 18px;
+}
+
+.image_tltle_btn_ul li img {
+    padding-top: 12px;
+}
+
+.image_tltle_btn_ul li p {
+    /*padding-top: 7px;*/
+    font-size: 12px;
+}
+.tdh_scan_btn_next{
+	background-image: url(${CONTEXT_PATH}/images/clsm/next.png);
+}
+.tdh_scan_btn_next:hover{
+	background-image: url(${CONTEXT_PATH}/images/clsm/next2.png);
+}
+.tdh_scan_btn_prev,
+.tdh_scan_btn_next{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+.tdh_scan_btn_prev{
+	background-image: url(${CONTEXT_PATH}/images/clsm/prev.png);
+}
+.tdh_scan_btn_prev:hover{
+	background-image: url(${CONTEXT_PATH}/images/clsm/prev2.png);
+}
+

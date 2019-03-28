@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.tdh.po.Fyr" table="fyr" schema="serializeform">
+        <id name="id" column="id"/>
+        <property name="sfsm" column="sfsm"/>
+        <property name="lxfs" column="lxfs"/>
+        <property name="xm" column="xm"/>
+        <property name="gzdw" column="gzdw"/>
+        <property name="dwfl" column="dwfl"/>
+        <property name="hyfl" column="hyfl"/>
+        <property name="gzdwdz" column="gzdwdz"/>
+        <property name="zw" column="zw"/>
+        <property name="xzjb" column="xzjb"/>
+        <property name="zzmm" column="zzmm"/>
+        <property name="mz" column="mz"/>
+        <property name="csrq" column="csrq"/>
+        <property name="xb" column="xb"/>
+    </class>
+</hibernate-mapping>

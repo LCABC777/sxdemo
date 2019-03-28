@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.tdh.po.Dw" table="dw" schema="serializeform">
+        <id name="id" column="id"/>
+        <property name="dwmc" column="dwmc"/>
+        <property name="dwfl" column="dwfl"/>
+        <property name="hyfl" column="hyfl"/>
+        <property name="fddbr" column="fddbr"/>
+        <property name="dwxz" column="dwxz"/>
+        <property name="dbrzjzl" column="dbrzjzl"/>
+        <property name="dbrzjhm" column="dbrzjhm"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.tdh.po.Jbxx" table="jbxx" schema="serializeform">
+        <id name="xfbh" column="xfbh"/>
+        <property name="txm" column="txm"/>
+        <property name="xfrq" column="xfrq"/>
+        <property name="xflb" column="xflb"/>
+        <property name="xfly" column="xfly"/>
+        <property name="xffs" column="xffs"/>
+        <property name="xwsj" column="xwsj"/>
+        <property name="sfsj" column="sfsj"/>
+        <property name="jjcd" column="jjcd"/>
+        <property name="qttz" column="qttz"/>
+        <property name="wtms" column="wtms"/>
+        <property name="wtgjz" column="wtgjz"/>
+        <property name="wtsd" column="wtsd"/>
+        <property name="xfrs" column="xfrs"/>
+        <property name="djr" column="djr"/>
+        <property name="djsj" column="djsj"/>
+        <property name="formIdNum" column="formIdNum"/>
+        <property name="zjIdNum" column="zjIdNum"/>
+    </class>
+</hibernate-mapping>
