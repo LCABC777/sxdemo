@@ -1,19 +1,21 @@
 package com.tdh.service;
 
-import com.tdh.dao.XfdjDAO;
+import com.tdh.dao.XfdjDao;
 import com.tdh.po.Jcdx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class XfdjService {
     @Autowired
-    private XfdjDAO xfdjDAO;
+    private XfdjDao xfdjDao;
     private Logger logger= LoggerFactory.getLogger(XfdjService.class);
 
     /**
@@ -22,7 +24,7 @@ public class XfdjService {
      */
     public String getJcdxXml() {
         StringBuilder s=new StringBuilder();
-        List<Jcdx> list=xfdjDAO.getJcdx();
+        List<Jcdx> list=xfdjDao.getJcdx();
         s.append("<?xml version='1.0' encoding='UTF-8'?><rows>");
         for (Jcdx jcdx:list){
             s.append("<row><cell>").append(jcdx.getDx().trim()).append("</cell>");
@@ -37,5 +39,22 @@ public class XfdjService {
         }
         s.append("</rows>");
         return s.toString();
+    }
+
+    /**
+     * 通过信访编号获取信访案件信息
+     * 信访案件信息由自然人(zrr)，单位(dw)，事件事故(sjsg)及各自证件组成
+     * @return
+     */
+    public List<List<Object>> getXfdjByXfbh(String xfbh){
+        List<List<Object>> lists=new ArrayList<List<Object>>();
+        lists.add((List<Object>)xfdjDao.getJbxxByXfbh(xfbh));
+        lists.add(xfdjDao.getXfdj(xfbh,"Zrr","zrr"));
+        lists.add(xfdjDao.getXfdj(xfbh,"Dw","dw"));
+        lists.add(xfdjDao.getXfdj(xfbh,"Sjsg","sjsg"));
+        lists.add(xfdjDao.getXfdj(xfbh,"Zjxx","zrr"));
+        lists.add(xfdjDao.getXfdj(xfbh,"Zjxx","dw"));
+        lists.add(xfdjDao.getXfdj(xfbh,"Zjxx","sjsg"));
+        return lists;
     }
 }

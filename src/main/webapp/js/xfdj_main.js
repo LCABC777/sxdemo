@@ -28,8 +28,10 @@ function showJcdx() {
             if (currentId!=null){
                 addZrr();
             }
-            var name = newGrid.cells(currentId,2).getValue();
+
             var prefix = '#' + xfbh + 'zrr' + formId;
+            //姓名
+            var name = newGrid.cells(currentId,2).getValue();
             $(prefix + 'xm').val(name);
             //设置性别单选框
             var xb = newGrid.cells(currentId,3).getValue();
@@ -37,7 +39,6 @@ function showJcdx() {
             var mz = newGrid.cells(currentId,4).getValue();
             //设置csrq
             var csrq = newGrid.cells(currentId,5).getValue();
-            //出生日期
             $(prefix + 'csrq').val(csrq);
             //设置职务
             var zw = newGrid.cells(currentId,6).getValue();
@@ -60,117 +61,72 @@ function showJcdx() {
     });
 }
 
-//添加自然人
-var formId=0
-function addZrr(currentId) {
-    var xfbh = $('#xfbh').val();
-    $.ajax({
-        type: "get",
-        url: "addZrr.do",
-        async: false,
-        success: function (data) {
-            var obj=$(data);
-            $('#bfyrDiv').append(obj);
-            //给dom对象,初始化表单
-            initFormByParent(obj);
-            if (currentId == null) {
-                formId = formId + 1;
-                $('#zrr').attr('id', xfbh + 'zrr' + formId);
-                changeNameAndId(xfbh + 'zrr' + formId, 'sfz');
-            } else {
-                $('#zrr').attr('id', currentId);
-                changeNameAndId(currentId, 'sfz');
-            }
-        }
-    })
+function addZrr(newFormId){
+    addForm(newFormId,'addZrr.do','bfyrDiv','zrr')
 }
-
-//添加单位
-function addDw(currentId){
-    var xfbh = $('#xfbh').val();
-    $.ajax({
-        type:"get",
-        url:"addDw.do",
-        async:false,
-        success:function(data){
-            var obj=$(data);
-            $('#bfyrDiv').append(obj);
-            initFormByParent(obj);
-            if(currentId == null){
-                formId = formId + 1;
-                $('#dw').attr('id', xfbh + 'dw' + formId);
-                changeNameAndId(xfbh + 'dw' + formId,'dwzj');
-            }else{
-                $('#dw').attr('id', currentId);
-                changeNameAndId(currentId,'dwzj');
-            }
-        }
-    })
+function addDw(newFormId){
+    addForm(newFormId,'addDw.do','bfyrDiv','dw')
 }
-
-//添加事件事故
 function addSjsg(newFormId){
-    var xfbh = $('#xfbh').val();
-    $.ajax({
-        type:"GET",
-        url:"addSjsg.do",
-        async:false,
-        success:function(data){
-            var obj=$(data);
-            $('#bfyrDiv').append(obj);
-            initFormByParent(obj);
-            if(newFormId == null){
-                formId = formId + 1;
-                $('#sjsg').attr('id', xfbh + 'sjsg' + formId);
-                changeNameAndId(xfbh + 'sjsg' + formId,'sjzj');
-            }else{
-                $('#sjsg').attr('id', newFormId);
-                changeNameAndId(newFormId,'sjzj');
-            }
-        }
-    })
+    addForm(newFormId,'addSjsg.do','bfyrDiv','sjsg')
 }
-
-//添加反映人
 function addFyr(newFormId){
-    var xfbh = $('#xfbh').val();
-    $.ajax({
-        type:"get",
-        url:"addFyr.do",
-        async:false,
-        success:function(data){
-            var obj=$(data);
-            $('#fyrDiv').append(obj);
-            initFormByParent(obj);
-            if(newFormId == null){
-                formId = formId + 1;
-                $('#fyr').attr('id', xfbh + 'fyr' + formId);
-                changeNameAndId(xfbh + 'fyr' + formId,'');
-            }else{
-                $('#fyr').attr('id',newFormId);
-                changeNameAndId(newFormId,'');
-            }
-        }
-    })
+    addForm(newFormId,'addFyr.do','fyrDiv','fyr')
 }
 
-function addForm(newFormId,requestUrl,formType) {
+var formId=0
+function addForm(newFormId,requestUrl,div,formType) {
     $.ajax({
         type:"get",
         url:requestUrl,
         async:false,
         success:function(data){
+            var obj=$(data);
             var xfbh = $('#xfbh').val();
-            $('#'+formType+'Div').append($(data));
-            initFormByParent($(data));
+            $('#'+div).append(obj);
+            initFormByParent(obj);
             if(newFormId == null){
                 formId = formId + 1;
                 $('#'+formType).attr('id', xfbh + formType + formId);
-                changeNameAndId(xfbh + formType + formId,'');
+                changeNameAndId(xfbh + formType + formId,formType);
             }else{
                 $('#'+formType).attr('id',newFormId);
-                changeNameAndId(newFormId,'');
+                changeNameAndId(newFormId,formType);
             }
+        }
+    })
+}
+
+//给表单取值
+function getXfdjInfo(){
+    var xfbh = $('#xfbh').val();
+    $.ajax({
+        type:"post",
+        url:"getXfdjByXfbh.do",
+        data:{
+            "xfbh":xfbh,
+        },
+        dataType:"json",
+        success:function(data){
+            //若data为null，则以该xfbh为主键的记录不存在
+            if($.isEmptyObject(data)){
+                alert("信访编号 " + xfbh + " 未被保存");
+            }else{
+                console.log(data);
+                //给各个表单赋值
+                giveJbxxForm(data[0][0]);
+                giveZrrForm(data[1]);
+                giveDwForm(data[2]);
+                giveSjsgForm(data[3]);
+                giveFyrForm(data[4]);
+                giveSfz(data[5]);
+                giveDwzz(data[6]);
+                giveSjsgzz(data[7]);
+            }
+        },
+        error:function(e){
+            alert("表单赋值有误");
+            console.log(e);
         }
     })
 }

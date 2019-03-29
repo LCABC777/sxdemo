@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @author 李超
  * @description 信访登记控制类
@@ -34,23 +36,31 @@ public class XfdjController {
         return "jcdx_page";
    }
 
-   @RequestMapping("addZrr.do")
+   @RequestMapping("/addZrr.do")
     public String addZrr(){
        return "xfdj_zrr";
    }
 
-    @RequestMapping("addDw.do")
+    @RequestMapping("/addDw.do")
     public String addDw(){
         return "xfdj_dw";
     }
 
-    @RequestMapping("addSjsg.do")
+    @RequestMapping("/addSjsg.do")
     public String addSjsg(){
-        return "xfdj_sjsg";
+       return "xfdj_sjsg";
+   }
+
+    @RequestMapping("/addFyr.do")
+    public String addFyr()
+    {
+        return "xfdj_fyr";
     }
 
-    @RequestMapping("addFyr.do")
-    public String addFyr(){
-        return "xfdj_fyr";
+    @RequestMapping(value = "/getXfdjByXfbh.do",produces = "application/xml;charset=utf-8")
+    @ResponseBody
+    public  List<List<Object>> getXfdjByXfbh(String xfbh){
+       List<List<Object>> lists=xfdjService.getXfdjByXfbh(xfbh);
+       return lists;
     }
 }

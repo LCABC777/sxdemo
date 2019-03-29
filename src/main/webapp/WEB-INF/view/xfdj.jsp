@@ -253,7 +253,7 @@
 				</div>
 			</div>
 			<div class="bottom">
-				<a class="tdh_btn tdh_btn_blue" id="getbtn" onclick="getForm()">取值</a>
+				<a class="tdh_btn tdh_btn_blue" id="getbtn" onclick="getXfdjInfo()">取值</a>
   				<a class="tdh_btn tdh_btn_blue" id="savebtn" onclick="serializeForm()">保存</a>
 				<a class="tdh_btn tdh_btn_blue" id="changebtn">修改</a>
 			</div>

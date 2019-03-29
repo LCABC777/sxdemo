@@ -40,38 +40,6 @@ function serializeForm(){
     })
 }
 
-//给表单取值
-function getForm(){
-    var xfbh = $('input[name="xfbh"]').val();
-    $.ajax({
-        type:"POST",
-        url:"toGet.do",
-        data:{
-            "xfbh":xfbh,
-        },
-        success:function(data){
-            //若data为null，则以该xfbh为主键的记录不存在
-            if($.isEmptyObject(data)){
-                alert("信访编号 " + xfbh + " 未被保存");
-            }else{
-                console.log(data);
-                //给各个表单赋值
-                giveJbxxForm(data[0][0]);
-                giveZrrForm(data[1]);
-                giveDwForm(data[2]);
-                giveSjsgForm(data[3]);
-                giveFyrForm(data[4]);
-                giveSfz(data[5]);
-                giveDwzz(data[6]);
-                giveSjsgzz(data[7]);
-            }
-        },
-        error:function(e){
-            alert("表单赋值有误");
-            console.log(e);
-        }
-    })
-}
 
 //证件zjid
 var idNum = 0;
