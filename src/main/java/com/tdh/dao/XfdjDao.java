@@ -1,5 +1,6 @@
 package com.tdh.dao;
 
+import com.tdh.po.Jbxx;
 import com.tdh.po.Jcdx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +29,8 @@ public class XfdjDao {
      * @param xhbh
      * @return
      */
-    public Object getJbxxByXfbh(String xhbh){
-        return hibernateTemplate.get("from Jbxx",xhbh);
+    public Jbxx getJbxxByXfbh(String xhbh){
+        return hibernateTemplate.get(Jbxx.class,xhbh);
     }
 
     /**

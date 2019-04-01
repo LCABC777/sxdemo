@@ -106,7 +106,7 @@ function getXfdjInfo(){
         data:{
             "xfbh":xfbh,
         },
-        dataType:"json",
+        //dataType:"json",
         success:function(data){
             //若data为null，则以该xfbh为主键的记录不存在
             if($.isEmptyObject(data)){
@@ -130,3 +130,4 @@ function getXfdjInfo(){
         }
     })
 }
+

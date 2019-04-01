@@ -57,7 +57,7 @@ public class XfdjController {
         return "xfdj_fyr";
     }
 
-    @RequestMapping(value = "/getXfdjByXfbh.do",produces = "application/xml;charset=utf-8")
+    @RequestMapping(value = "/getXfdjByXfbh.do")//,produces = "application/xml;charset=utf-8")
     @ResponseBody
     public  List<List<Object>> getXfdjByXfbh(String xfbh){
        List<List<Object>> lists=xfdjService.getXfdjByXfbh(xfbh);

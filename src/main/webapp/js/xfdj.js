@@ -31,10 +31,10 @@ function serializeForm(){
         url:"toSave.do",
         data:jbxxForm + '&' + bfyrForm + '&' + fyrForm,
         success:function(data){
-            window.location.reload();
+            layer.msg("保存成功");
         },
         error:function(e){
-            alert("表单保存有误");
+            layer.msg("表单保存有误");
             console.log(e);
         }
     })
@@ -346,105 +346,6 @@ function chooseChbs(formId,chbs){
         setCheckVal('#' + formId + chbsArr[i], true);
     }
 }
-
-//新增自然人表单
-// var formId = 0;
-// //新增自然人,并动态改变id
-// function addZrr(newFormId){
-//     var xfbh = $('#xfbh').val();
-//     $.ajax({
-//         type:"GET",
-//         url:"zrrForm.do",
-//         async:false,
-//         date:{},
-//         success:function(data){
-//             var obj = $(data);
-//             $('#bfyrDiv').append(obj);
-//             initFormByParent(obj);
-//             if(newFormId == null){
-//                 formId = formId + 1;
-//                 $('#zrr').attr('id', xfbh + 'zrr' + formId);
-//                 changeNameAndId(xfbh + 'zrr' + formId,'sfz');
-//             }else{
-//                 $('#zrr').attr('id', newFormId);
-//                 changeNameAndId(newFormId,'sfz');
-//             }
-//         },
-//     })
-// }
-//
-// //新增单位
-// function addDw(newFormId){
-//     var xfbh = $('#xfbh').val();
-//     $.ajax({
-//         type:"GET",
-//         url:"dwForm.do",
-//         async:false,
-//         date:{},
-//         success:function(data){
-//             var obj = $(data);
-//             $('#bfyrDiv').append(obj);
-//             initFormByParent(obj);
-//             if(newFormId == null){
-//                 formId = formId + 1;
-//                 $('#dw').attr('id', xfbh + 'dw' + formId);
-//                 changeNameAndId(xfbh + 'dw' + formId,'dwzj');
-//             }else{
-//                 $('#dw').attr('id', newFormId);
-//                 changeNameAndId(newFormId,'dwzj');
-//             }
-//         }
-//     })
-// }
-//
-// //新增事件事故表单
-// function addSjsg(newFormId){
-//     var xfbh = $('#xfbh').val();
-//     $.ajax({
-//         type:"GET",
-//         url:"sjsgForm.do",
-//         async:false,
-//         date:{},
-//         success:function(data){
-//             var obj = $(data);
-//             $('#bfyrDiv').append(obj);
-//             initFormByParent(obj);
-//             if(newFormId == null){
-//                 formId = formId + 1;
-//                 $('#sjsg').attr('id', xfbh + 'sjsg' + formId);
-//                 changeNameAndId(xfbh + 'sjsg' + formId,'sjzj');
-//             }else{
-//                 $('#sjsg').attr('id', newFormId);
-//                 changeNameAndId(newFormId,'sjzj');
-//             }
-//         }
-//     })
-// }
-//
-// //新增反映人
-// function addFyr(newFormId){
-//     var xfbh = $('#xfbh').val();
-//     $('#formIdXx')
-//     $.ajax({
-//         type:"get",
-//         url:"fyrForm.do",
-//         async:false,
-//         date:{},
-//         success:function(data){
-//             var obj = $(data);
-//             $('#fyrDiv').append(obj);
-//             initFormByParent(obj);
-//             if(newFormId == null){
-//                 formId = formId + 1;
-//                 $('#fyr').attr('id', xfbh + 'fyr' + formId);
-//                 changeNameAndId(xfbh + 'fyr' + formId,'');
-//             }else{
-//                 $('#fyr').attr('id',newFormId);
-//                 changeNameAndId(newFormId,'');
-//             }
-//         }
-//     })
-//}
 
 //批量选择sfz
 function sfzChecked(obj) {

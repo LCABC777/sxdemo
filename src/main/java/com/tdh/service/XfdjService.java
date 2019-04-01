@@ -1,6 +1,7 @@
 package com.tdh.service;
 
 import com.tdh.dao.XfdjDao;
+import com.tdh.po.Jbxx;
 import com.tdh.po.Jcdx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,10 @@ public class XfdjService {
      */
     public List<List<Object>> getXfdjByXfbh(String xfbh){
         List<List<Object>> lists=new ArrayList<List<Object>>();
-        lists.add((List<Object>)xfdjDao.getJbxxByXfbh(xfbh));
+        Jbxx jbxx=xfdjDao.getJbxxByXfbh(xfbh);
+        List<Object> list=new ArrayList<Object>();
+        list.add(jbxx);
+        lists.add(list);
         lists.add(xfdjDao.getXfdj(xfbh,"Zrr","zrr"));
         lists.add(xfdjDao.getXfdj(xfbh,"Dw","dw"));
         lists.add(xfdjDao.getXfdj(xfbh,"Sjsg","sjsg"));

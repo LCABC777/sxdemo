@@ -91,7 +91,9 @@
 					</colgroup>
 					<tr>
 						<td colspan="4">
-							<div class="tdh_form_caption"><i class="tdh_form_tag"></i>基本信息</div>
+							<div class="tdh_form_caption"><i class="tdh_form_tag"></i>基本信息&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="tdh_btn tdh_btn_blue" id="getbtn" onclick="getXfdjInfo()">导入数据</a>
+							</div>
 						</td>
 					</tr>
 					<tr>
@@ -253,7 +255,6 @@
 				</div>
 			</div>
 			<div class="bottom">
-				<a class="tdh_btn tdh_btn_blue" id="getbtn" onclick="getXfdjInfo()">取值</a>
   				<a class="tdh_btn tdh_btn_blue" id="savebtn" onclick="serializeForm()">保存</a>
 				<a class="tdh_btn tdh_btn_blue" id="changebtn">修改</a>
 			</div>
