@@ -3,17 +3,19 @@ package com.tdh.service;
 import com.tdh.dao.XfdjDao;
 import com.tdh.po.Jbxx;
 import com.tdh.po.Jcdx;
+import com.tdh.util.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
-@Transactional
 public class XfdjService {
     @Autowired
     private XfdjDao xfdjDao;
@@ -60,5 +62,33 @@ public class XfdjService {
         lists.add(xfdjDao.getXfdj(xfbh,"Zjxx","dw"));
         lists.add(xfdjDao.getXfdj(xfbh,"Zjxx","sjsg"));
         return lists;
+    }
+
+    @Transactional
+    public String saveXfdj(HttpServletRequest request){
+        //若对象不存在，则保存，存在则修改。
+        String jbxxHideId = request.getParameter("jbxx_jbxxHideId");
+        logger.info("service jbxxHideId--->" + jbxxHideId);
+        if (jbxxHideId != null) {
+            String[] formIds = jbxxHideId.split(",");
+            String[] types= {"zrr","dw","sjsg","fyr","zj"};//实体类类型
+            for (String formId : formIds) {
+                for(String type:types){
+                    if (formId.contains(type)){//若主键包含自然人,单位,事件事故,反映人，证件，等则根据id和实体类型删除
+                        xfdjDao.deleteByIdAndType(formId,type);
+                    }
+                }
+            }
+        }
+        Jbxx jbxxForm = CommonUtils.getJbxxFormObj(request);
+        logger.info("service JbxxForm--->" + jbxxForm);
+        getSaveDao.saveForm(jbxxForm);
+        List<Object> objList = CommonUtils.getFormObj(request);
+        logger.info("service objList--->" + objList);
+        for (Object object : objList) {
+            getSaveDao.saveForm(object);
+            logger.info("service objList Object--->" + object);
+        }
+        return "";
     }
 }

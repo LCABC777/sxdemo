@@ -258,7 +258,7 @@ function giveZj(data,typeClass){
 }
 
 
-//判断必填项是否填写
+//判断必填项是否填写并校验格式
 function checkNecessary(formStr){
     var xfbh = $('#xfbh').val();
     var xfrq = $('#xfrq').val();
@@ -339,7 +339,7 @@ function checkNecessary(formStr){
     }
 }
 
-//多选框选择
+//多选框选择赋值
 function chooseChbs(formId,chbs){
     var chbsArr = chbs.split(",");
     for(var i = 0; i < chbsArr.length; i++){

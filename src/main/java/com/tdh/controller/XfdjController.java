@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -55,6 +56,18 @@ public class XfdjController {
     public String addFyr()
     {
         return "xfdj_fyr";
+    }
+
+    @RequestMapping("/saveXfdj.do")
+    @ResponseBody
+    public String saveXfdj(HttpServletRequest request){
+       try{
+           xfdjService.saveXfdj(request);
+       }
+       catch (Exception e){
+           return "error";
+       }
+       return "success";
     }
 
     @RequestMapping(value = "/getXfdjByXfbh.do")//,produces = "application/xml;charset=utf-8")

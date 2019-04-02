@@ -43,4 +43,13 @@ public class XfdjDao {
         List<Object> list=hibernateTemplate.find("from "+table+" where id like '"+xfbh+type+"%'");
         return list;
     }
+
+    public void saveForm(Object jbxxForm) {
+        hibernateTemplate.saveOrUpdate(jbxxForm);
+    }
+
+    public void deleteByIdAndType(String id,String type) {
+        String hql="delete from "+type+" where id='"+id+"'";
+       hibernateTemplate.getSessionFactory().openSession().createQuery(hql);
+    }
 }
