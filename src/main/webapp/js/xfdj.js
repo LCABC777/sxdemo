@@ -12,7 +12,6 @@ $(function(){
 
 //序列化form表单
 function serializeForm(){
-    var xfbh = $('#xfbh').val();
     $('#formIdNum').val(formId);
     $('#zjIdNum').val(idNum);
     //序列化基本信息
@@ -27,11 +26,15 @@ function serializeForm(){
         return;
     }
     $.ajax({
-        type:"POST",
-        url:"toSave.do",
+        type:"post",
+        url:"saveXfdj.do",
         data:jbxxForm + '&' + bfyrForm + '&' + fyrForm,
         success:function(data){
-            layer.msg("保存成功");
+            if (data=="success"){
+                layer.msg("保存成功");
+            } else {
+                layer.msg("保存失败");
+            }
         },
         error:function(e){
             layer.msg("表单保存有误");

@@ -16,7 +16,7 @@
     </properties>
 
     <!--远程仓库地址-->
-    <repositories>
+   <repositories>
         <repository>
             <id>nexus</id>
             <name>nexus Repository</name>
@@ -46,7 +46,7 @@
     </pluginRepositories>
 
     <!-- 使用分发管理将本项目打成jar包，直接上传到指定服务器 -->
-   <!-- <distributionManagement>
+    <distributionManagement>
         <repository>
             <id>nexus</id>
             <name>Releases Repository</name>
@@ -57,7 +57,7 @@
             <name>Snapshot Repository</name>
             <url>http://www.tdhnet.com.cn:8094/repository/maven-snapshots</url>
         </snapshotRepository>
-    </distributionManagement>-->
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -148,11 +148,19 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
         <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
+            <groupId>tdh</groupId>
+            <artifactId>tdh-dbcp</artifactId>
+            <version>1.4.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>

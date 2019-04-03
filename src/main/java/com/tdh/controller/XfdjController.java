@@ -1,10 +1,11 @@
 package com.tdh.controller;
 import com.tdh.service.XfdjService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class XfdjController {
     @Autowired
     private XfdjService xfdjService;
+    private Logger logger=LoggerFactory.getLogger(XfdjController.class);
     /**
      * @description 主页面
      * @return
@@ -60,13 +62,15 @@ public class XfdjController {
 
     @RequestMapping("/saveXfdj.do")
     @ResponseBody
-    public String saveXfdj(HttpServletRequest request){
-       try{
+    public String saveXfdj(HttpServletRequest request) throws Exception {
+    /*   try{*/
            xfdjService.saveXfdj(request);
-       }
+           logger.info("============================");
+     /*  }
        catch (Exception e){
+           logger.error("业务层方法saveXfdj()异常:"+e);
            return "error";
-       }
+       }*/
        return "success";
     }
 

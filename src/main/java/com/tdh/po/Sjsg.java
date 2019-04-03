@@ -4,12 +4,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * 事件事故实体类
  */
 
-public class Sjsg {
+public class Sjsg implements Serializable {
     //事件id
     private String id;
     //事件事故名称
@@ -165,5 +166,21 @@ public class Sjsg {
         result = 31 * result + (dbrzjzl != null ? dbrzjzl.hashCode() : 0);
         result = 31 * result + (dbrzjhm != null ? dbrzjhm.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Sjsg{" +
+                "id='" + id + '\'' +
+                ", sjsgmc='" + sjsgmc + '\'' +
+                ", sjsgdd='" + sjsgdd + '\'' +
+                ", zrdwmc='" + zrdwmc + '\'' +
+                ", zrdwfl='" + zrdwfl + '\'' +
+                ", hyfl='" + hyfl + '\'' +
+                ", fddbr='" + fddbr + '\'' +
+                ", dwxz='" + dwxz + '\'' +
+                ", dbrzjzl='" + dbrzjzl + '\'' +
+                ", dbrzjhm='" + dbrzjhm + '\'' +
+                '}';
     }
 }

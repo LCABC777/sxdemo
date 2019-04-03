@@ -28,7 +28,6 @@ function showJcdx() {
             if (currentId!=null){
                 addZrr();
             }
-
             var prefix = '#' + xfbh + 'zrr' + formId;
             //姓名
             var name = newGrid.cells(currentId,2).getValue();
@@ -71,8 +70,29 @@ function addSjsg(newFormId){
     addForm(newFormId,'addSjsg.do','bfyrDiv','sjsg')
 }
 function addFyr(newFormId){
-    addForm(newFormId,'addFyr.do','fyrDiv','fyr')
+    var xfbh = $('#xfbh').val();
+    $('#formIdXx')
+    $.ajax({
+        type:"get",
+        url:"addFyr.do",
+        async:false,
+        success:function(data){
+            var obj = $(data);
+            $('#fyrDiv').append(obj);
+            initFormByParent(obj);
+            if(newFormId == null){
+                formId = formId + 1;
+                $('#fyr').attr('id', xfbh + 'fyr' + formId);
+                changeNameAndId(xfbh + 'fyr' + formId,'');
+            }else{
+                $('#fyr').attr('id',newFormId);
+                changeNameAndId(newFormId,'');
+            }
+        }
+    })
 }
+
+
 
 var formId=0
 function addForm(newFormId,requestUrl,div,formType) {

@@ -4,12 +4,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * 基本信息实体类
  */
 
-public class Jbxx {
+public class Jbxx implements Serializable {
     //信访编号
     private String xfbh;
     //条形码
@@ -277,5 +278,29 @@ public class Jbxx {
         result = 31 * result + (formIdNum != null ? formIdNum.hashCode() : 0);
         result = 31 * result + (zjIdNum != null ? zjIdNum.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Jbxx{" +
+                "xfbh='" + xfbh + '\'' +
+                ", txm='" + txm + '\'' +
+                ", xfrq='" + xfrq + '\'' +
+                ", xflb='" + xflb + '\'' +
+                ", xfly='" + xfly + '\'' +
+                ", xffs='" + xffs + '\'' +
+                ", xwsj='" + xwsj + '\'' +
+                ", sfsj='" + sfsj + '\'' +
+                ", jjcd='" + jjcd + '\'' +
+                ", qttz='" + qttz + '\'' +
+                ", wtms='" + wtms + '\'' +
+                ", wtgjz='" + wtgjz + '\'' +
+                ", wtsd='" + wtsd + '\'' +
+                ", xfrs='" + xfrs + '\'' +
+                ", djr='" + djr + '\'' +
+                ", djsj='" + djsj + '\'' +
+                ", formIdNum='" + formIdNum + '\'' +
+                ", zjIdNum='" + zjIdNum + '\'' +
+                '}';
     }
 }

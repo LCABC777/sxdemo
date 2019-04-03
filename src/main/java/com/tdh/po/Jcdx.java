@@ -4,12 +4,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * 监察对象实体类
  */
 
-public class Jcdx {
+public class Jcdx implements Serializable {
     //多选(0表示非多选,1表示多选)
     private String dx;
     //序号
@@ -151,5 +152,20 @@ public class Jcdx {
         result = 31 * result + (gbgxcj != null ? gbgxcj.hashCode() : 0);
         result = 31 * result + (gzdw != null ? gzdw.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Jcdx{" +
+                "dx='" + dx + '\'' +
+                ", xh=" + xh +
+                ", xm='" + xm + '\'' +
+                ", xb='" + xb + '\'' +
+                ", mz='" + mz + '\'' +
+                ", csrq='" + csrq + '\'' +
+                ", zw='" + zw + '\'' +
+                ", gbgxcj='" + gbgxcj + '\'' +
+                ", gzdw='" + gzdw + '\'' +
+                '}';
     }
 }

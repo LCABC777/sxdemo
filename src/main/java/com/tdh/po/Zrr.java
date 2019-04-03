@@ -4,12 +4,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * 自然人
  */
 
-public class Zrr {
+public class Zrr implements Serializable {
     //自然人id
     private String id;
     //姓名
@@ -263,5 +264,28 @@ public class Zrr {
         result = 31 * result + (csrq != null ? csrq.hashCode() : 0);
         result = 31 * result + (xb != null ? xb.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Zrr{" +
+                "id='" + id + '\'' +
+                ", xm='" + xm + '\'' +
+                ", rytz='" + rytz + '\'' +
+                ", gbgxcj='" + gbgxcj + '\'' +
+                ", zxwycj='" + zxwycj + '\'' +
+                ", rddbcj='" + rddbcj + '\'' +
+                ", jwwycj='" + jwwycj + '\'' +
+                ", gzdw='" + gzdw + '\'' +
+                ", dwfl='" + dwfl + '\'' +
+                ", hyfl='" + hyfl + '\'' +
+                ", gzdwdz='" + gzdwdz + '\'' +
+                ", zw='" + zw + '\'' +
+                ", xzjb='" + xzjb + '\'' +
+                ", zzmm='" + zzmm + '\'' +
+                ", mz='" + mz + '\'' +
+                ", csrq='" + csrq + '\'' +
+                ", xb='" + xb + '\'' +
+                '}';
     }
 }

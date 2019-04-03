@@ -223,4 +223,24 @@ public class Fyr implements Serializable {
         result = 31 * result + (xb != null ? xb.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Fyr{" +
+                "id='" + id + '\'' +
+                ", sfsm='" + sfsm + '\'' +
+                ", lxfs='" + lxfs + '\'' +
+                ", xm='" + xm + '\'' +
+                ", gzdw='" + gzdw + '\'' +
+                ", dwfl='" + dwfl + '\'' +
+                ", hyfl='" + hyfl + '\'' +
+                ", gzdwdz='" + gzdwdz + '\'' +
+                ", zw='" + zw + '\'' +
+                ", xzjb='" + xzjb + '\'' +
+                ", zzmm='" + zzmm + '\'' +
+                ", mz='" + mz + '\'' +
+                ", csrq='" + csrq + '\'' +
+                ", xb='" + xb + '\'' +
+                '}';
+    }
 }

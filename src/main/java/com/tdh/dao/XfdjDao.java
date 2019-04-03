@@ -2,6 +2,8 @@ package com.tdh.dao;
 
 import com.tdh.po.Jbxx;
 import com.tdh.po.Jcdx;
+import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,21 +37,24 @@ public class XfdjDao {
 
     /**
      * 根据信访编号和信访中的实体类型获取信访基本信息
-     * @param xfbh
-     * @param type
+     * @param xfbh 信访编号
+     * @param type 实体类类型
      * @return
      */
     public List<Object> getXfdj(String xfbh,String table,String type){
-        List<Object> list=hibernateTemplate.find("from "+table+" where id like '"+xfbh+type+"%'");
+        String hql="from "+table+" where id like '"+xfbh+type+"%'";
+        logger.info(hql);
+        List<Object> list=hibernateTemplate.find(hql);
         return list;
     }
 
-    public void saveForm(Object jbxxForm) {
-        hibernateTemplate.saveOrUpdate(jbxxForm);
+    public void saveForm(Object o) {
+        hibernateTemplate.saveOrUpdate(o);
     }
 
     public void deleteByIdAndType(String id,String type) {
         String hql="delete from "+type+" where id='"+id+"'";
-       hibernateTemplate.getSessionFactory().openSession().createQuery(hql);
+        Session session=hibernateTemplate.getSessionFactory().openSession();
+        session.createQuery(hql);
     }
 }

@@ -4,12 +4,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * 单位实体类
  */
 
-public class Dw {
+public class Dw implements Serializable {
     //单位id
     private String id;
     //单位名称
@@ -137,5 +138,19 @@ public class Dw {
         result = 31 * result + (dbrzjzl != null ? dbrzjzl.hashCode() : 0);
         result = 31 * result + (dbrzjhm != null ? dbrzjhm.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Dw{" +
+                "id='" + id + '\'' +
+                ", dwmc='" + dwmc + '\'' +
+                ", dwfl='" + dwfl + '\'' +
+                ", hyfl='" + hyfl + '\'' +
+                ", fddbr='" + fddbr + '\'' +
+                ", dwxz='" + dwxz + '\'' +
+                ", dbrzjzl='" + dbrzjzl + '\'' +
+                ", dbrzjhm='" + dbrzjhm + '\'' +
+                '}';
     }
 }

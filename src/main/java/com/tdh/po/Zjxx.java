@@ -4,18 +4,29 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * 证件信息实体类
  */
 
-public class Zjxx {
+public class Zjxx implements Serializable {
     //证件id
     private String id;
     //
     private String zjzl;
     private String zjhm;
     private String qtzzmc;
+
+    @Override
+    public String toString() {
+        return "Zjxx{" +
+                "id='" + id + '\'' +
+                ", zjzl='" + zjzl + '\'' +
+                ", zjhm='" + zjhm + '\'' +
+                ", qtzzmc='" + qtzzmc + '\'' +
+                '}';
+    }
 
     @Id
     @Column(name = "id")
