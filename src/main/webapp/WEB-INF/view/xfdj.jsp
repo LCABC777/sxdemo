@@ -99,7 +99,7 @@
 					<tr>
 						<td class="tdTitle"><i class="required">*</i>信访编号</td>
 						<td class="tdCont disabled">
-							<input class="inputText" type="text" placeholder="" name="xfbh" id="xfbh" onblur="getForm()"/>
+							<input class="inputText" type="text" placeholder="" name="xfbh" id="xfbh" onblur="getXfdjInfo()"/>
 							<input class="inputText" type="hidden" id="jbxxHideId" name="jbxxHideId" value="">
 							<input class="inputText" type="hidden" id="formIdNum" name="formIdNum" value="">
 							<input class="inputText" type="hidden" id="zjIdNum" name="zjIdNum" value="">
@@ -256,7 +256,7 @@
 			</div>
 			<div class="bottom">
   				<a class="tdh_btn tdh_btn_blue" id="savebtn" onclick="serializeForm()">保存</a>
-				<a class="tdh_btn tdh_btn_blue" id="changebtn">修改</a>
+				<a class="tdh_btn tdh_btn_blue" id="changebtn" onclick="serializeForm()">修改</a>
 			</div>
 		</div>
 		<!--信访登记信息结束-->

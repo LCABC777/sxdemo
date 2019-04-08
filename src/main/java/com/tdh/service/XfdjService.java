@@ -3,7 +3,7 @@ package com.tdh.service;
 import com.tdh.dao.XfdjDao;
 import com.tdh.po.Jbxx;
 import com.tdh.po.Jcdx;
-import com.tdh.util.CommonUtils;
+import com.tdh.util.GetXfdjObject;
 import com.tdh.util.XfdjUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,10 +69,11 @@ public class XfdjService {
 
 
     @Transactional
-    public String saveXfdj(HttpServletRequest request) throws Exception {
+    public void saveXfdj(HttpServletRequest request) throws Exception {
         //若对象不存在，则保存，存在则修改。
         String jbxxHideId = request.getParameter("jbxx_jbxxHideId");
         logger.info("service jbxxHideId--->" + jbxxHideId);
+        //jbxxHideId存的是用户打算删除的记录的主键，判断是否有删除
         if (jbxxHideId != null) {
             String[] formIds = jbxxHideId.split(",");
             String[] types= {"zrr","dw","sjsg","fyr","zj"};//实体类类型
@@ -78,20 +81,42 @@ public class XfdjService {
                 for(String type:types){
                     if (formId.contains(type)){//若主键包含自然人,单位,事件事故,反映人，证件，等则根据id和实体类型删除
                         String tableType= XfdjUtil.toUpperCaseFirstOne(type);
-                        xfdjDao.deleteByIdAndType(formId,tableType);
+                        String className="com.tdh.po."+tableType;
+                        Object o=getObj(className,formId);
+                        xfdjDao.deleteByObject(o);
                     }
                 }
             }
         }
-        Jbxx jbxxForm = CommonUtils.getJbxxFormObj(request);
-        logger.info("service JbxxForm--->" + jbxxForm);
+        //获取基本信息对象
+        Jbxx jbxxForm = GetXfdjObject.getJbxxFormObj(request);
+        logger.info("JbxxForm--->" + jbxxForm);
         xfdjDao.saveForm(jbxxForm);
-        List<Object> objList = CommonUtils.getFormObj(request);
-        logger.info("service objList--->" + objList);
+        //获得除了基本信息外所有对象
+        List<Object> objList = GetXfdjObject.getFormObj(request);
+        logger.info("新增或修改的实体类列表--->" + objList);
         for (Object object : objList) {
             xfdjDao.saveForm(object);
             logger.info("service objList Object--->" + object);
         }
-        return "";
+    }
+
+    /**
+     *根据类名和主键生成对象
+     * @param className 类名
+     * @param id 主键
+     * @return
+     * @throws ClassNotFoundException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     */
+    private static Object getObj(String className,String id) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        Class clazz=Class.forName(className);
+        Object o=clazz.newInstance();
+        Method method=clazz.getMethod("setId",String.class);
+        method.invoke(o,id);
+        return o;
     }
 }

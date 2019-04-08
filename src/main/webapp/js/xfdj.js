@@ -7,11 +7,15 @@ $(function(){
         hideInput.val(oldVal + formObj.attr("id") + ",");
         formObj.remove();
     })
-
 })
 
-//序列化form表单
+var isInTheSave = false;
+//序列化并保存form表单
 function serializeForm(){
+    if(isInTheSave){
+        return;
+    }
+    isInTheSave = true;
     $('#formIdNum').val(formId);
     $('#zjIdNum').val(idNum);
     //序列化基本信息
@@ -22,7 +26,7 @@ function serializeForm(){
     var fyrForm = serialize('#fyrDiv', undefined, 'fyr__');
     console.log(jbxxForm);
     //判断必填项
-    if(checkNecessary(jbxxForm) == "checkWrong"){
+    if(xfdj_verify(jbxxForm) == "checkWrong"){
         return;
     }
     $.ajax({
@@ -31,14 +35,23 @@ function serializeForm(){
         data:jbxxForm + '&' + bfyrForm + '&' + fyrForm,
         success:function(data){
             if (data=="success"){
-                layer.msg("保存成功");
+                //layer.msg("保存成功");
+                layer.confirm("保存成功,是否刷新当前页面？", {
+                    btn: ["确定","取消"] //按钮
+                }, function(){
+                   window.location.reload();
+                }, function(){
+                    isInTheSave=false;
+                });
             } else {
                 layer.msg("保存失败");
+                isInTheSave = false;
             }
         },
         error:function(e){
             layer.msg("表单保存有误");
             console.log(e);
+            isInTheSave = false;
         }
     })
 }
@@ -262,7 +275,7 @@ function giveZj(data,typeClass){
 
 
 //判断必填项是否填写并校验格式
-function checkNecessary(formStr){
+function xfdj_verify(formStr){
     var xfbh = $('#xfbh').val();
     var xfrq = $('#xfrq').val();
     var xflb = $('#xflb').val();

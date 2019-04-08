@@ -2,16 +2,21 @@ package com.tdh.util;
 
 import com.tdh.po.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
- * 封装了一些常用工具类
+ * 根据请过传过来的序列化参数返回实体对象
  * @author lc
- *
  */
-public class CommonUtils {
+public class GetXfdjObject {
 	/*
 	 * 根据name后缀得到某个表有几个
 	 * @param strings
@@ -26,69 +31,68 @@ public class CommonUtils {
 		List<String>  formIdList = new ArrayList<String>();
 		//存放证件主键的list
 		List<String> zjIdList = new ArrayList<String>();
-		
+
 		Enumeration<String> names = request.getParameterNames();
 		//得到同一类表的所有主键
 		String formId = "";
 		while (names.hasMoreElements()) {
 			String name = names.nextElement();
-			if (name.indexOf("xm") > -1) {
+			if (name.contains("xm")) {
 				formId = name.substring(5,name.indexOf("xm"));
 				formIdList.add(formId);
-			}else if (name.indexOf("dwmc") > -1) {
+			}else if (name.contains("dwmc")) {
 				formId = name.substring(5,name.indexOf("dwmc"));
 				formIdList.add(formId);
-			}else if (name.indexOf("sjsgmc") > -1) {
+			}else if (name.contains("sjsgmc")) {
 				formId = name.substring(5,name.indexOf("sjsgmc"));
-				formIdList.add(formId); 
+				formIdList.add(formId);
 			}
 		}
 		//根据主键，查找对应的属性，并生成对象
 		for (String idStr : formIdList) {
 			names = request.getParameterNames();
 			while (names.hasMoreElements()) {
-				String name =names.nextElement();
+				String name =  names.nextElement();
 				//将属性名、属性值存入map，将zj主键存入list
-				if (name.indexOf(idStr) > -1) {
+				if (name.contains(idStr)) {
 					attrMap.put(name.substring(idStr.length() + 5),request.getParameter(name));
-					if (name.indexOf("zjzl") > -1) {
+					if (name.contains("zjzl")) {
 						String zjEnd = name.substring("zjzl".length() + idStr.length() + 5);
 						zjIdList.add(zjEnd);
 					}
 				}
 			}
 			//创建对象并存入formObj
-			if (idStr.indexOf("zrr") > -1) {
-				Zrr zrrForm = (Zrr) init(attrMap, "com.tdh.po.Zrr");
-				zrrForm.setId(idStr);
-				formObj.add(zrrForm);
+			if (idStr.contains("zrr")) {
+				Zrr zrr = (Zrr) init(attrMap, "com.tdh.po.Zrr");
+				zrr.setId(idStr);
+				formObj.add(zrr);
 				initZjxx(zjIdList, attrMap, idStr, formObj);
-			}else if (idStr.indexOf("dw") > -1) {
-				Dw dwForm = (Dw) init(attrMap, "com.tdh.po.Dw");
-				dwForm.setId(idStr);
-				formObj.add(dwForm);
+			}else if (idStr.contains("dw")) {
+				Dw dw = (Dw) init(attrMap, "com.tdh.po.Dw");
+				dw.setId(idStr);
+				formObj.add(dw);
 				initZjxx(zjIdList, attrMap, idStr, formObj);
-			}else if (idStr.indexOf("sjsg") > -1) {
-				Sjsg sjsgForm = (Sjsg) init(attrMap, "com.tdh.po.Sjsg");
-				sjsgForm.setId(idStr);
-				formObj.add(sjsgForm);
+			}else if (idStr.contains("sjsg")) {
+				Sjsg sjsg = (Sjsg) init(attrMap, "com.tdh.po.Sjsg");
+				sjsg.setId(idStr);
+				formObj.add(sjsg);
 				initZjxx(zjIdList, attrMap, idStr, formObj);
-			}else if (idStr.indexOf("fyr") > -1) {
-				Fyr fyrForm = (Fyr) init(attrMap, "com.tdh.po.Fyr");
-				fyrForm.setId(idStr);
-				formObj.add(fyrForm);
+			}else if (idStr.contains("fyr")) {
+				Fyr fyr = (Fyr) init(attrMap, "com.tdh.po.Fyr");
+				fyr.setId(idStr);
+				formObj.add(fyr);
 				initZjxx(zjIdList, attrMap, idStr, formObj);
 			}
 			attrMap.clear();
 			zjIdList.clear();
 		}
-		System.out.println(formObj.toString());
 		return formObj;
 	}
-	
+
 	/*
 	 * 去除序列化 生成 的前缀
-	 * @param request 
+	 * @param request
 	 * @param suff 	前缀
 	 * @return 	Map<String,String>
 	 */
@@ -105,10 +109,10 @@ public class CommonUtils {
 		}
 		return map;
 	}
-	
+
 	/*
 	 * 根据jbxx字符串初始化jbxxForm对象
-	 * @param request 
+	 * @param request
 	 * @throws Exception
 	 */
 	public static Jbxx getJbxxFormObj(HttpServletRequest request) throws Exception{
@@ -116,7 +120,7 @@ public class CommonUtils {
 		Map<String, String> map = requestToMap(request, "jbxx_");
 		return (Jbxx)init(map, "com.tdh.po.Jbxx");
 	}
-	
+
 	/*
 	 * 根据存放属性名、属性值的map和类名，生成对应的对象。
 	 * @param map 	存放属性名和对应的属性值
@@ -146,7 +150,7 @@ public class CommonUtils {
 		}
 		return obj;
 	}
-	
+
 	/*
 	 * 将字符串的第一个字符小写
 	 * @param key 	 第一个字符大写的字符串
@@ -154,9 +158,9 @@ public class CommonUtils {
 	 */
 	public static String strLowFirst(String key){
 		String first = key.substring(0,1).toLowerCase();
-		return first+key.substring(1); 
+		return first+key.substring(1);
 	}
-	
+
 	/*
 	 * 创建zjxx对象
 	 * @param zjIdList	存放zjId的list
@@ -177,27 +181,8 @@ public class CommonUtils {
 			formObj.add(zjxx);
 		}
 	}
-	
-	/**   
-	 * @Title: listToJcdx   
-	 * @Description: 根据list创建jcdx对象
-	 * @param list
-	 * @return Jcdx
-	 */  
-	public static Jcdx listToJcdx(List<Object> list){
-		Jcdx jcdx = new Jcdx();
-		jcdx.setXh(Integer.parseInt( (String) list.get(0)));
-		jcdx.setDx((String)list.get(1));
-		jcdx.setXm((String)list.get(2));
-		jcdx.setXb((String)list.get(3));
-		jcdx.setMz((String)list.get(4));
-		jcdx.setCsrq((String)list.get(5));
-		jcdx.setZw((String)list.get(6));
-		jcdx.setGbgxcj((String)list.get(7));
-		jcdx.setGzdw((String)list.get(8));
-		return jcdx;
-	}
-	
+
+
 	/*
 	 * 若字符串为null，则返回空字符串
 	 * @param String
